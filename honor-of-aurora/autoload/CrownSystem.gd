@@ -520,6 +520,7 @@ func send_ore_with_caravan(ore_amount: int) -> bool:
 	_check_displeasure_recovery(actual, skip_order_favor)
 	Events.caravan_pending_changed.emit(false)
 	Events.caravan_dispatched.emit(actual, SaveManager.caravan_sent_count)
+	PycoLog.log_event_by_type("caravan_sent", {"ore": actual, "count": SaveManager.caravan_sent_count})
 	Events.on_caravan_no_longer_pending()
 	_resolve_crown_order_on_caravan_dispatch()
 	_process_caravan_arrival_queue()
@@ -641,6 +642,7 @@ func _update_crown_title() -> bool:
 		var favor_from_title := _apply_crown_mood_on_title_promotion()
 		var title: Dictionary = BalanceConfig.CROWN_TITLES[new_idx]
 		Events.crown_title_changed.emit(new_idx, str(title.get("name", "")))
+		PycoLog.log_event_by_type("crown_title_up", {"index": new_idx, "name": str(title.get("name", ""))})
 		_enqueue_crown_title_patents(prev_idx, new_idx)
 		call_deferred("_try_start_next_crown_patent_dialogue")
 		SaveManager.save_game(true)

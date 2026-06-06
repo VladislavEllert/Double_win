@@ -313,6 +313,7 @@ func purchase_premium_ore_pack(pack_id: String) -> bool:
 	_check_patron_tier_unlock()
 	SaveManager.save_game(true)
 	Events.premium_ore_pack_purchased.emit(pack_id, ore_amount)
+	PycoLog.log_event_by_type("shop_purchase", {"pack": pack_id, "ore": ore_amount})
 	return true
 
 
@@ -699,6 +700,7 @@ func defer_location_changed(loc: Events.LOCATION) -> void:
 
 func _emit_location_changed_deferred(loc: Events.LOCATION) -> void:
 	Events.location_changed.emit(loc)
+	PycoLog.log_event_by_type("location_enter", {"location": Events.LOCATION.keys()[loc]})
 
 
 func handle_location_changed(new_location: Events.LOCATION):
@@ -798,6 +800,7 @@ func handle_location_changed(new_location: Events.LOCATION):
 		PostFinaleWorld.player_movement_locked = false
 	if expedition_return_count_incremented and new_location == Events.LOCATION.BASE:
 		Events.expedition_returned.emit(SaveManager.expedition_return_count)
+		PycoLog.log_event_by_type("expedition_return", {"count": SaveManager.expedition_return_count})
 	## После выхода из главного меню HUD создаётся заново — один раз синхронизируем счётчики (как при входе в меню).
 	if prev_location == Events.LOCATION.MENU and new_location != Events.LOCATION.MENU:
 		call_deferred("_emit_hud_save_resource_signals")

@@ -49,6 +49,8 @@ HintToast="*res://autoload/HintToast.gd"
 EasyHints="*res://autoload/EasyHints.gd"
 PauseOverlay="*res://autoload/pause_overlay.gd"
 Haptics="*res://autoload/Haptics.gd"
+PycoLog="*res://addons/pycolytics/pyco_log.gd"
+AppFocus="*res://autoload/app_focus.gd"
 
 [display]
 

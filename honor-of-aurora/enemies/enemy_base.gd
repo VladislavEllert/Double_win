@@ -838,6 +838,7 @@ func die():
 	GameManager.register_enemy_kill_for_playtest()
 	var hero_lv: int = SaveManager.current_level
 	var is_boss := is_in_group("BOSS")
+	PycoLog.log_event_by_type("enemy_killed", {"boss": is_boss, "hero_level": hero_lv})
 	var rain_mul: float = RainSystem.get_monster_kill_reward_multiplier()
 	var xp_reward := int(round(float(BalanceConfig.get_exp_reward(enemy_level, hero_lv, is_boss)) * reward_mult * rain_mul))
 	GameManager.add_exp(xp_reward)

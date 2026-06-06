@@ -69,6 +69,7 @@ func blocks_new_enemy_spawns() -> bool:
 
 
 func on_story_island_5_boss_won() -> void:
+	PycoLog.log_event_by_type("final_boss_won", {})
 	if not is_finale_world():
 		return
 	_refresh_finale_bgm_if_needed()
@@ -175,6 +176,8 @@ func _on_dialogue_ended_credits(sequence: DialogueSequence) -> void:
 
 
 func _start_ending_sequence() -> void:
+	if not _ending_started:
+		PycoLog.log_event_by_type("game_finale", {})
 	_ending_started = true
 	player_movement_locked = true
 	var player := GameManager.current_scene_player

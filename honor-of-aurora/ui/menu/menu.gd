@@ -62,4 +62,5 @@ func _on_settings_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	SoundManager.play_ui_button()
+	await PycoLog.log_stop_playing()
 	get_tree().quit()

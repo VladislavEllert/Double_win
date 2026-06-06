@@ -131,6 +131,7 @@ func try_open_chest_if_player_inside() -> bool:
 	_show_feedback(loot)
 	_play_loot_sound(loot)
 	Events.chest_opened.emit(id, loot)
+	PycoLog.log_event_by_type("chest_opened", {"chest_id": id})
 	return true
 
 

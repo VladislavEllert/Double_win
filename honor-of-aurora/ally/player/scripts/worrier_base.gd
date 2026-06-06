@@ -383,6 +383,7 @@ func _handle_death() -> void:
 
 func die():
 	SaveManager.death_count += 1
+	PycoLog.log_event_by_type("hero_death", {"location": Events.LOCATION.keys()[Events.current_location], "deaths_total": SaveManager.death_count})
 	if EasyHints != null:
 		EasyHints.notify_player_death(int(Events.current_location))
 	SoundManager.play_death()
